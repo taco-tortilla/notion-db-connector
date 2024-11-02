@@ -1,0 +1,14 @@
+services:
+  app:
+    container_name: notion-db-connector
+    build:
+      context: .
+      dockerfile: ./build/Dockerfile
+    image: notion-db-connector:1.0
+    ports:
+      - 8080:8080
+    volumes:
+      - ./notion-db-connector:/app/notion-db-connector
+    tty: true
+    environment:
+      - TZ=Asia/Tokyo
