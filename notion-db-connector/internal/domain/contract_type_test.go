@@ -13,7 +13,7 @@ func TestNewContractTypeContract(t *testing.T) {
 	}
 }
 
-func TestNewContractTypeTraial(t *testing.T) {
+func TestNewContractTypeTrial(t *testing.T) {
 	expected := "trial"
 	result, err := NewContractType(expected)
 
