@@ -4,7 +4,7 @@ type Block interface {
 	GetType() string
 }
 
-type CustomerFeedbackRequest struct {
+type NotionDBFeedbackRequest struct {
 	Parent     Parent     `json:"parent"`
 	Properties Properties `json:"properties"`
 	Children   []Children `json:"children"`
