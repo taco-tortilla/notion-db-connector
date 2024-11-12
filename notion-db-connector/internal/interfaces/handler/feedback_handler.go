@@ -28,6 +28,7 @@ func (fh feedbackHandler) AddFeedback(c *gin.Context) {
 	if err := c.Bind(&request); err != nil {
 		log.Fatal("Failed to bind request body")
 	}
+	fh.feedbackUseCase.InsertFeedback(&request)
 
 	c.Status(201)
 }
