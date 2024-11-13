@@ -1,23 +1,21 @@
 package main
 
 import (
-	"os"
-
 	"github.com/gin-gonic/gin"
 	"github.com/taco-tortilla/notion-db-connector/config"
+	"github.com/taco-tortilla/notion-db-connector/internal/infrastructure/api"
+	"github.com/taco-tortilla/notion-db-connector/internal/interfaces/handler"
+	"github.com/taco-tortilla/notion-db-connector/internal/usecase"
 )
 
 func main() {
-
 	config.LoadEnv()
 
-	result := os.Getenv("NOTION_DB_ID")
+	feedbackAPI := api.NewFeedbackAPI()
+	feedbackUseCase := usecase.NewFeedbackUseCase(feedbackAPI)
+	feedbackHandler := handler.NewFeedbackHandler(feedbackUseCase)
 
 	r := gin.Default()
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": result,
-		})
-	})
+	r.POST("/feedback", feedbackHandler.AddFeedback)
 	r.Run()
 }
