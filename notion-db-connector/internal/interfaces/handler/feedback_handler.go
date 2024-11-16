@@ -1,8 +1,6 @@
 package handler
 
 import (
-	"log"
-
 	"github.com/gin-gonic/gin"
 
 	"github.com/taco-tortilla/notion-db-connector/internal/interfaces/request"
@@ -26,9 +24,13 @@ func NewFeedbackHandler(fu usecase.FeedbackUseCase) FeedbackHandler {
 func (fh feedbackHandler) AddFeedback(c *gin.Context) {
 	request := request.FeedbackRequest{}
 	if err := c.Bind(&request); err != nil {
-		log.Fatal("Failed to bind request body")
+		c.JSON(400, gin.H{"error": "Invalid request body"})
+		return
 	}
-	fh.feedbackUseCase.InsertFeedback(&request)
+	if err := fh.feedbackUseCase.InsertFeedback(&request); err != nil {
+		c.JSON(500, gin.H{"error": err.Error()})
+		return
+	}
 
 	c.Status(201)
 }
