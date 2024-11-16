@@ -8,8 +8,10 @@ import (
 )
 
 var (
-	DbId      string
-	NotionURL string
+	DbId          string
+	NotionURL     string
+	NotionVersion string
+	NotionToken   string
 )
 
 func LoadEnv() {
@@ -19,4 +21,6 @@ func LoadEnv() {
 
 	DbId = os.Getenv("NOTION_DB_ID")
 	NotionURL = os.Getenv("NOTION_BASE_URL")
+	NotionVersion = os.Getenv("NOTION_VERSION")
+	NotionToken = os.Getenv("NOTION_TOKEN")
 }
